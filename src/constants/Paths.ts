@@ -12,4 +12,27 @@ export default {
     Update: '/update',
     Delete: '/delete/:id',
   },
+  Personal: {
+    Base: '/personal',
+    Get: '/all',
+    Add: '/add',
+    Update: '/update',
+    Delete: '/delete/:id',
+  },
+  Jefe: {
+    Base: '/jefe',
+    Get: '/all',
+    Add: '/add',
+    Update: '/update',
+    Delete: '/delete/:id',
+  },
+  Area: {
+    Base: '/area',
+    Get: '/all',
+    Add: '/add',
+    Update: '/update',
+    Delete: '/delete/:nombre',
+  },
+
+
 } as const;

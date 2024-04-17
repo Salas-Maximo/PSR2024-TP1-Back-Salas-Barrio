@@ -1,67 +1,62 @@
 import moment from 'moment';
+import Area, { IArea } from './Area';
 
 
 // **** Variables **** //
 
 const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' + 
-  'with the appropriate user keys.';
+  'with the appropriate keys.';
 
 
 // **** Types **** //
 
-export interface Musica {
+export interface IPersonal {
   id: number;
-  name: string;
-  created: Date;
+  apellido: string;
+  nombre: string;
+  area: IArea;
 }
 
 
-// **** Functions **** //
 
-/**
- * Create new Music.
- */
+
 function new_(
-  name?: string,
-  created?: Date,
-  id?: number, // id last cause usually set by db
-): Musica {
+  apellido?: string,
+  nombre?: string,
+  area?: typeof Area,
+  id?: number, 
+): IPersonal {
   return {
     id: (id ?? -1),
-    name: (name ?? ''),
-    created: (created ? new Date(created) : new Date()),
+    apellido: (apellido ?? ''),
+    nombre: (nombre ?? ''),
+    area: (area ?? Area.new()),
   };
 }
 
-/**
- * Get user instance from object.
- */
-function from(param: object): Musica {
-  if (!isUser(param)) {
+
+function from(param: object): I {
+  if (!isPersonal(param)) {
     throw new Error(INVALID_CONSTRUCTOR_PARAM);
   }
-  const p = param as Musica;
-  return new_(p.name, p.created, p.id);
+  const p = param as IPersonal;
+  return new_(p.apellido,p.nombre, p.area, p.id);
 }
 
-/**
- * See if the param meets criteria to be a user.
- */
-function isUser(arg: unknown): boolean {
+
+function isPersonal(arg: unknown): boolean {
   return (
     !!arg &&
     typeof arg === 'object' &&
     'id' in arg && typeof arg.id === 'number' && 
-    'name' in arg && typeof arg.name === 'string' &&
-    'created' in arg && moment(arg.created as string | Date).isValid()
+    'apellido' in arg && typeof arg.apellido === 'string' &&
+    'nombre' in arg && typeof arg.nombre === 'string' &&
+    'area' in arg && Area.isArea(arg.area)
   );
 }
-
-
-// **** Export default **** //
 
 export default {
   new: new_,
   from,
-  isUser,
+  isPersonal,
 } as const;

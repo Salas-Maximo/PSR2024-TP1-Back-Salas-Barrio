@@ -3,8 +3,10 @@
 import jsonfile from 'jsonfile';
 
 import { IUser } from '@src/models/User';
-import { Musica } from '@src/models/Musica';
-import { Album } from '@src/models/Album';
+import { IArea } from '@src/models/Area';
+import { IJefe } from '@src/models/Jefe';
+import { IPersonal } from '@src/models/Personal';
+
 
 
 // **** Variables **** //
@@ -15,8 +17,9 @@ const DB_FILE_NAME = 'database.json';
 // **** Types **** //
 
 interface IDb {
-  album: Album[];
-  musica: Musica[];
+  areas: IArea[];
+  jefes: IJefe[];
+  personal: IPersonal[];
   users: IUser[];
 }
 
