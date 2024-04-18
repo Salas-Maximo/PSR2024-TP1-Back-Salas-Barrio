@@ -1,6 +1,7 @@
 import { getRandomInt } from '@src/util/misc';
 import orm from './MockOrm';
 import { IArea } from '@src/models/Area';
+import { IPersonal } from '@src/models/Personal';
 
 
 
@@ -61,6 +62,7 @@ async function delete_(nombre : string): Promise<void> {
     }
   }
 }
+
 
 
 // **** Export default **** //

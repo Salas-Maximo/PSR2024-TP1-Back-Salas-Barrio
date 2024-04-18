@@ -41,11 +41,12 @@ async function add(personal: IPersonal): Promise<void> {
 async function update(personal: IPersonal): Promise<void> {
   const db = await orm.openDb();
   for (let i = 0; i < db.personal.length; i++) {
-  if (db.personal[i].id === personal.id) {
-      const dbPersonal = db.personal[i];
+    if (db.personal[i].id === personal.id) {
+      const dbpersonal = db.personal[i];
       db.personal[i] = {
-        ...dbPersonal,
-        area: personal.area,
+        ...dbpersonal,
+        nombre: personal.nombre,
+        apellido: personal.apellido,
       };
       return orm.saveDb(db);
     }

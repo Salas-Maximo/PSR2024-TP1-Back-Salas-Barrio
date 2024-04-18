@@ -15,23 +15,20 @@ export interface IPersonal {
   id: number;
   apellido: string;
   nombre: string;
-  area: IArea;
 }
 
 
 
 
 function new_(
+  id?: number,
   apellido?: string,
   nombre?: string,
-  area?: IArea,
-  id?: number, 
 ): IPersonal {
   return {
-    id: (id ?? -1),
     apellido: (apellido ?? ''),
     nombre: (nombre ?? ''),
-    area: (area ?? Area.new()),
+    id: (id ?? -1),
   };
 }
 
@@ -41,7 +38,7 @@ function from(param: object): IPersonal {
     throw new Error(INVALID_CONSTRUCTOR_PARAM);
   }
   const p = param as IPersonal;
-  return new_(p.apellido,p.nombre, p.area, p.id);
+  return new_(p.id,p.apellido,p.nombre);
 }
 
 
@@ -52,7 +49,7 @@ function isPersonal(arg: unknown): boolean {
     'id' in arg && typeof arg.id === 'number' && 
     'apellido' in arg && typeof arg.apellido === 'string' &&
     'nombre' in arg && typeof arg.nombre === 'string' &&
-    'area' in arg && Area.isArea(arg.area)
+    'area' in arg && typeof arg.area === 'string'
   );
 }
 

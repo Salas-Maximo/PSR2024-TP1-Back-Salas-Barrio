@@ -10,8 +10,8 @@ function getAll(): Promise<IPersonal[]> {
   return PersonalRepo.getAll();
 }
 
-function addOne(user: IPersonal): Promise<void> {
-  return PersonalRepo.add(user);
+function addOne(personal: IPersonal): Promise<void> {
+  return PersonalRepo.add(personal);
 }
 
 
