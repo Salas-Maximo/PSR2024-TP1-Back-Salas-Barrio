@@ -1,5 +1,6 @@
 import moment from 'moment';
-import Area, { IArea } from './Area';
+import Area from './Area';
+import { IArea } from './Area'; 
 
 
 // **** Variables **** //
@@ -23,7 +24,7 @@ export interface IPersonal {
 function new_(
   apellido?: string,
   nombre?: string,
-  area?: typeof Area,
+  area?: IArea,
   id?: number, 
 ): IPersonal {
   return {
@@ -35,7 +36,7 @@ function new_(
 }
 
 
-function from(param: object): I {
+function from(param: object): IPersonal {
   if (!isPersonal(param)) {
     throw new Error(INVALID_CONSTRUCTOR_PARAM);
   }

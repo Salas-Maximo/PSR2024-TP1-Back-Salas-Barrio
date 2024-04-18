@@ -1,13 +1,12 @@
 import moment from 'moment';
 import Personal, { IPersonal } from './Personal';
+import Jefe from './Jefe';
 import { IJefe } from './Jefe';
-
 
 // **** Variables **** //
 
 const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' + 
   'with the appropriate keys.';
-
 
 // **** Types **** //
 
@@ -25,7 +24,7 @@ function new_(
 ): IArea {
   return {
     nombre: (nombre ?? ''),
-    jefe: (jefe ?? new.jefe()),
+    jefe: (jefe ?? Jefe.new()),
     personal: (personal ?? []),
   };
 }

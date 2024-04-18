@@ -1,5 +1,6 @@
 import moment from 'moment';
 import Area from './Area';
+import { IArea } from './Area';
 
 
 const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' + 
@@ -9,9 +10,8 @@ export interface IJefe {
   id: number;
   apellido: string;
   nombre: string;
-  area: typeof Area;
+  area: IArea;
 }
-
 
 
 
@@ -19,7 +19,7 @@ function new_(
   id?: number,
   apellido?: string,
   nombre?: string,
-  area?: typeof Area,
+  area?: IArea,
 ): IJefe {
   return {
     apellido: (apellido ?? ''),
