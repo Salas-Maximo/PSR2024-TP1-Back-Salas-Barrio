@@ -42,16 +42,16 @@ async function _delete(nombre : string): Promise<void> {
   return AreaRepo.delete(nombre);
 }
 
-async function addPersonal(personal: IPersonal): Promise<void> {
-  const persists = await PersonalRepo.persists(personal.id);
-  if (!persists) {
-    throw new RouteError(
-      HttpStatusCodes.NOT_FOUND,
-      AREA_NOT_FOUND_ERR,
-    );
-  }
-  return AreaRepo.update(area);
-}
+// async function addPersonal(personal: IPersonal): Promise<void> {
+//   const persists = await PersonalRepo.persists(personal.id);
+//   if (!persists) {
+//     throw new RouteError(
+//       HttpStatusCodes.NOT_FOUND,
+//       AREA_NOT_FOUND_ERR,
+//     );
+//   }
+//   return AreaRepo.update(area);
+// }
 
 
 

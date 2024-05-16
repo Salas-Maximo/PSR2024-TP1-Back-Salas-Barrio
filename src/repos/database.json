@@ -1,22 +1,99 @@
 {
+    "personal": [
+        {
+            "id": 894796076921,
+            "apellido": "barrio",
+            "nombre": "Joaquin",
+            "area": "Marketing"
+        },
+        {
+            "id": 650033300533,
+            "apellido": "Salas",
+            "nombre": "Maximo",
+            "area": "Marketing"
+        },
+        {
+            "id": 448158525751,
+            "apellido": "Tucci",
+            "nombre": "Tiziano",
+            "area": "Ventas"
+        },
+        {
+            "id": 464534500710,
+            "apellido": "Mendez",
+            "nombre": "Gonzalo",
+            "area": "Ventas"
+        },
+        {
+            "id": 790301534962,
+            "apellido": "Diaz",
+            "nombre": "Pablo",
+            "area": "RRHH"
+        }
+    ],
+    "jefes": [
+        {
+            "id": 95843814125,
+            "apellido": "shlaclancle",
+            "nombre": "Leandlo",
+            "area": "RRHH"
+        },
+        {
+            "id": 995544050073,
+            "apellido": "Pruscino",
+            "nombre": "Nicolas",
+            "area": "Desarrollo"
+        },
+        {
+            "id": 620768603272,
+            "apellido": "Ronaldo",
+            "nombre": "Cristiano",
+            "area": "Ventas"
+        }
+    ],
     "areas": [
         {
-            "nombre": "marketing",
-            "jefe": {
-                "id": 95843814125,
-                "apellido": "shlaclancle",
-                "nombre": "Leandlo"
-            },
+            "nombre": "Marketing",
             "personal": [
                 {
-                    "id": null,
+                    "id": 894796076921,
                     "apellido": "barrio",
-                    "nombre": "joaquin"
+                    "nombre": "Joaquin",
+                    "area": "Marketing"
                 },
                 {
-                    "id": null,
-                    "apellido": "salas",
-                    "nombre": "maximo"
+                    "id": 650033300533,
+                    "apellido": "Salas",
+                    "nombre": "Maximo",
+                    "area": "Marketing"
+                }
+            ]
+        },
+        {
+            "nombre": "Ventas",
+            "personal": [
+                {
+                    "id": 448158525751,
+                    "apellido": "Tucci",
+                    "nombre": "Tiziano",
+                    "area": "Ventas"
+                },
+                {
+                    "id": 464534500710,
+                    "apellido": "Mendez",
+                    "nombre": "Gonzalo",
+                    "area": "Ventas"
+                }
+            ]
+        },
+        {
+            "nombre": "RRHH",
+            "personal": [
+                {
+                    "id": 790301534962,
+                    "apellido": "Diaz",
+                    "nombre": "Pablo",
+                    "area": "RRHH"
                 }
             ]
         }
