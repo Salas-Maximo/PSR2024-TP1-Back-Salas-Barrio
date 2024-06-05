@@ -1,69 +1,83 @@
-import { getRandomInt } from '@src/util/misc';
+import { IArea } from 'src/models/Area';
+import { getRandomInt } from 'src/util/misc';
 import orm from './MockOrm';
-import { IArea } from '@src/models/Area';
-import { IPersonal } from '@src/models/Personal';
 
+// **** Functions **** //
 
-
-async function getOne(nombre: string): Promise<IArea | null> {
+/**
+ * Get one area.
+ */
+async function getOne(name: string): Promise<IArea | null> {
   const db = await orm.openDb();
-  for (const Area of db.areas) {
-    if (Area.nombre === nombre) {
-      return Area;
+  for (const area of db.areas) {
+    if (area.name === name) {
+      return area;
     }
   }
   return null;
 }
 
-async function persists(nombre: string): Promise<boolean> {
+/**
+ * See if an area with the given id exists.
+ */
+async function persists(id: number): Promise<boolean> {
   const db = await orm.openDb();
   for (const area of db.areas) {
-    if (area.nombre === nombre) {
+    if (area.id === id) {
       return true;
     }
   }
   return false;
 }
 
-
+/**
+ * Get all areas.
+ */
 async function getAll(): Promise<IArea[]> {
   const db = await orm.openDb();
   return db.areas;
 }
 
+/**
+ * Add one area.
+ */
 async function add(area: IArea): Promise<void> {
   const db = await orm.openDb();
-  //area.id = getRandomInt();
+  area.id = getRandomInt();
   db.areas.push(area);
   return orm.saveDb(db);
 }
 
-
+/**
+ * Update an area.
+ */
 async function update(area: IArea): Promise<void> {
   const db = await orm.openDb();
   for (let i = 0; i < db.areas.length; i++) {
-  if (db.areas[i].nombre === area.nombre) {
-      const dbArea = db.areas[i];
+    if (db.areas[i].id === area.id) {
+      const dbarea = db.areas[i];
       db.areas[i] = {
-        ...dbArea,
-        jefe: area.jefe,
+        ...dbarea,
+        name: area.name,
+        jefes: area.jefes,
       };
       return orm.saveDb(db);
     }
   }
 }
 
-async function delete_(nombre : string): Promise<void> {
+/**
+ * Delete one area.
+ */
+async function delete_(id: number): Promise<void> {
   const db = await orm.openDb();
   for (let i = 0; i < db.areas.length; i++) {
-    if (db.areas[i].nombre === nombre) {
+    if (db.areas[i].id === id) {
       db.areas.splice(i, 1);
       return orm.saveDb(db);
     }
   }
 }
-
-
 
 // **** Export default **** //
 

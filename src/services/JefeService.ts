@@ -3,31 +3,44 @@ import { IJefe } from '@src/models/Jefe';
 import { RouteError } from '@src/other/classes';
 import HttpStatusCodes from '@src/constants/HttpStatusCodes';
 
+// **** Variables **** //
 
-export const JEFE_NOT_FOUND_ERR = 'jefe not found';
+export const JEFE_NOT_FOUND_ERR = 'Jefe not found';
 
+// **** Functions **** //
 
-function getAll(): Promise<IJefe[]> {
-  return JefeRepo.getAll();
+/**
+ * Get all jefes.
+ */
+function getAll(id: number): Promise<IJefe[]> {
+  return JefeRepo.getAll(id);
 }
 
-
-function addOne(user: IJefe): Promise<void> {
-  return JefeRepo.add(user);
+/**
+ * Add one jefe.
+ */
+function addOne(jefe: IJefe, idArea: number): Promise<void> {
+  return JefeRepo.add(jefe, idArea);
 }
 
-
-async function updateOne(personal: IJefe): Promise<void> {
-  const persists = await JefeRepo.persists(personal.id);
+/**
+ * Update one jefe.
+ */
+async function updateOne(jefe: IJefe): Promise<void> {
+  const persists = await JefeRepo.persists(jefe.id);
   if (!persists) {
     throw new RouteError(
       HttpStatusCodes.NOT_FOUND,
       JEFE_NOT_FOUND_ERR,
     );
   }
-  return JefeRepo.update(personal);
+  // Return jefe
+  return JefeRepo.update(jefe);
 }
 
+/**
+ * Delete a jefe by their id.
+ */
 async function _delete(id: number): Promise<void> {
   const persists = await JefeRepo.persists(id);
   if (!persists) {
@@ -36,9 +49,11 @@ async function _delete(id: number): Promise<void> {
       JEFE_NOT_FOUND_ERR,
     );
   }
+  // Delete jefe
   return JefeRepo.delete(id);
 }
 
+// **** Export default **** //
 
 export default {
   getAll,

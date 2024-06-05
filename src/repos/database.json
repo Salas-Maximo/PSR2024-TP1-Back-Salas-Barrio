@@ -1,101 +1,64 @@
 {
-    "personal": [
-        {
-            "id": 894796076921,
-            "apellido": "barrio",
-            "nombre": "Joaquin",
-            "area": "Marketing"
-        },
-        {
-            "id": 650033300533,
-            "apellido": "Salas",
-            "nombre": "Maximo",
-            "area": "Marketing"
-        },
-        {
-            "id": 448158525751,
-            "apellido": "Tucci",
-            "nombre": "Tiziano",
-            "area": "Ventas"
-        },
-        {
-            "id": 464534500710,
-            "apellido": "Mendez",
-            "nombre": "Gonzalo",
-            "area": "Ventas"
-        },
-        {
-            "id": 790301534962,
-            "apellido": "Diaz",
-            "nombre": "Pablo",
-            "area": "RRHH"
-        }
-    ],
-    "jefes": [
-        {
-            "id": 95843814125,
-            "apellido": "shlaclancle",
-            "nombre": "Leandlo",
-            "area": "RRHH"
-        },
-        {
-            "id": 995544050073,
-            "apellido": "Pruscino",
-            "nombre": "Nicolas",
-            "area": "Desarrollo"
-        },
-        {
-            "id": 620768603272,
-            "apellido": "Ronaldo",
-            "nombre": "Cristiano",
-            "area": "Ventas"
-        }
-    ],
     "areas": [
-        {
-            "nombre": "Marketing",
+      {
+        "id": 740838,
+        "name": "Recursos Humanos",
+        "jefes": [
+          {
+            "id": 222,
+            "name": "María López",
             "personal": [
-                {
-                    "id": 894796076921,
-                    "apellido": "barrio",
-                    "nombre": "Joaquin",
-                    "area": "Marketing"
-                },
-                {
-                    "id": 650033300533,
-                    "apellido": "Salas",
-                    "nombre": "Maximo",
-                    "area": "Marketing"
-                }
+              { "id": 2222, "name": "Juan Pérez" },
+              { "id": 22221, "name": "Ana Gómez" }
             ]
-        },
-        {
-            "nombre": "Ventas",
+          },
+          {
+            "id": 432432,
+            "name": "Carlos Rodríguez",
             "personal": [
-                {
-                    "id": 448158525751,
-                    "apellido": "Tucci",
-                    "nombre": "Tiziano",
-                    "area": "Ventas"
-                },
-                {
-                    "id": 464534500710,
-                    "apellido": "Mendez",
-                    "nombre": "Gonzalo",
-                    "area": "Ventas"
-                }
+              { "id": 223214422, "name": "Luisa Martínez" },
+              { "id": 423321312321, "name": "Pedro Sánchez" }
             ]
-        },
-        {
-            "nombre": "RRHH",
+          }
+        ]
+      },
+      {
+        "id": 7408381,
+        "name": "Desarrollo de Producto",
+        "jefes": [
+          {
+            "id": 2221,
+            "name": "Lucía Fernández",
             "personal": [
-                {
-                    "id": 790301534962,
-                    "apellido": "Diaz",
-                    "nombre": "Pablo",
-                    "area": "RRHH"
-                }
+              { "id": 22221, "name": "Mario Ruiz" },
+              { "id": 22222, "name": "Sofía Díaz" },
+              { "id": 22223, "name": "Diego García" },
+              { "id": 22224, "name": "Laura López" }
             ]
-        }
+          },
+          {
+            "id": 32312,
+            "name": "Carlos Gómez",
+            "personal": [
+              { "id": 22221, "name": "María González" },
+              { "id": 22222, "name": "Federico Pérez" },
+              { "id": 22223, "name": "Valentina Sánchez" },
+              { "id": 22224, "name": "Javier Martínez" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 190661328501,
+        "name": "Operaciones",
+        "jefes": [
+          {
+            "id": 222333,
+            "name": "Laura Torres",
+            "personal": [{ "id": 254436222, "name": "Juanita Ramírez" }]
+          }
+        ]
+      }
     ]
-}
+  }
+  

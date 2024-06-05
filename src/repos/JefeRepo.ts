@@ -1,19 +1,26 @@
+import { IJefe } from '@src/models/Jefe';
 import { getRandomInt } from '@src/util/misc';
 import orm from './MockOrm';
-import { IJefe } from '@src/models/Jefe';
 
 
+// **** Functions **** //
 
-async function getOne(apellido: string, nombre: string): Promise<IJefe | null> {
+/**
+ * Get one jefe.
+ */
+async function getOne(name: string): Promise<IJefe | null> {
   const db = await orm.openDb();
   for (const jefe of db.jefes) {
-    if (jefe.nombre === nombre && jefe.apellido === apellido) {
+    if (jefe.name === name) {
       return jefe;
     }
   }
   return null;
 }
 
+/**
+ * See if a jefe with the given id exists.
+ */
 async function persists(id: number): Promise<boolean> {
   const db = await orm.openDb();
   for (const jefe of db.jefes) {
@@ -24,35 +31,56 @@ async function persists(id: number): Promise<boolean> {
   return false;
 }
 
-
-async function getAll(): Promise<IJefe[]> {
+/**
+ * Get all jefes.
+ */
+async function getAll(id: number): Promise<IJefe[]> {
+  console.log(id);
   const db = await orm.openDb();
+  for (const area of db.areas) {
+    if(area.id === id){
+      return area.jefes;
+    }
+  }
   return db.jefes;
 }
 
-async function add(jefe: IJefe): Promise<void> {
+/**
+ * Add one jefe.
+ */
+async function add(jefe: IJefe, idArea: number): Promise<void> {
+  //get 
+  console.log(idArea);
   const db = await orm.openDb();
-  jefe.id = getRandomInt();
-  db.jefes.push(jefe);
+  for (const area of db.areas) {
+    if(area.id === idArea){
+      area.jefes.push(jefe);
+    }
+  }
   return orm.saveDb(db);
 }
 
-
+/**
+ * Update a jefe.
+ */
 async function update(jefe: IJefe): Promise<void> {
   const db = await orm.openDb();
   for (let i = 0; i < db.jefes.length; i++) {
     if (db.jefes[i].id === jefe.id) {
-      const dbJefe = db.jefes[i];
+      const dbjefe = db.jefes[i];
       db.jefes[i] = {
-        ...dbJefe,
-        nombre: jefe.nombre,
-        apellido: jefe.apellido,
+        ...dbjefe,
+        name: jefe.name,
+        personales: jefe.personales,
       };
       return orm.saveDb(db);
     }
   }
 }
 
+/**
+ * Delete one jefe.
+ */
 async function delete_(id: number): Promise<void> {
   const db = await orm.openDb();
   for (let i = 0; i < db.jefes.length; i++) {

@@ -2,146 +2,120 @@ import { Router } from 'express';
 import jetValidator from 'jet-validator';
 
 import Paths from '../constants/Paths';
-import User from '@src/models/User';
-import UserRoutes from './UserRoutes';
-import Personal from '@src/models/Personal';
-import PersonalRoutes from './PersonalRoutes';
-import Area from '@src/models/Area';
+import Area from 'src/models/Area';
+import Jefe from 'src/models/Jefe';
 import AreaRoutes from './AreaRoutes';
-import Jefe from '@src/models/Jefe';
 import JefeRoutes from './JefeRoutes';
+import Personal from 'src/models/Personal';
+import PersonalRoutes from './PersonalRoutes';
 
 // **** Variables **** //
 
 const apiRouter = Router(),
   validate = jetValidator();
 
-
-// ** Add UserRouter ** //
-
-const userRouter = Router();
-
-// Get all users
-userRouter.get(
-  Paths.Users.Get,
-  UserRoutes.getAll,
-);
-
-// Add one user
-userRouter.post(
-  Paths.Users.Add,
-  validate(['user', User.isUser]),
-  UserRoutes.add,
-);
-
-// Update one user
-userRouter.put(
-  Paths.Users.Update,
-  validate(['user', User.isUser]),
-  UserRoutes.update,
-);
-
-// Delete one user
-userRouter.delete(
-  Paths.Users.Delete,
-  validate(['id', 'number', 'params']),
-  UserRoutes.delete,
-);
-
-// Add UserRouter
-apiRouter.use(Paths.Users.Base, userRouter);
-
-
-
-
-// **  PERSONAL  ** //
-
-const personalRouter = Router();
-
-personalRouter.get(
-  Paths.Personal.Get,
-  PersonalRoutes.getAll,
-);
-
-personalRouter.post(
-  Paths.Personal.Add,
-  validate(['personal', Personal.isPersonal]),
-  PersonalRoutes.add,
-);
-
-personalRouter.put(
-  Paths.Personal.Update,
-  validate(['personal', Personal.isPersonal]),
-  PersonalRoutes.update,
-);
-
-personalRouter.delete(
-  Paths.Personal.Delete,
-  validate(['id', 'number', 'params']),
-  PersonalRoutes.delete,
-);
-
-apiRouter.use(Paths.Personal.Base, personalRouter);
-
-
-// **  JEFE  ** //
-
-const jefeRouter = Router();
-
-jefeRouter.get(
-  Paths.Jefe.Get,
-  JefeRoutes.getAll,
-);
-
-jefeRouter.post(
-  Paths.Jefe.Add,
-  validate(['jefe', Jefe.isJefe]),
-  JefeRoutes.add,
-);
-
-jefeRouter.put(
-  Paths.Jefe.Update,
-  validate(['jefe', Jefe.isJefe]),
-  JefeRoutes.update,
-);
-
-jefeRouter.delete(
-  Paths.Jefe.Delete,
-  validate(['id', 'number', 'params']),
-  JefeRoutes.delete,
-);
-
-apiRouter.use(Paths.Jefe.Base, jefeRouter);
-
-// **  AREA  ** //
+// ** Add areaRouter ** //
 
 const areaRouter = Router();
 
+// Get all areas
 areaRouter.get(
-  Paths.Area.Get,
+  Paths.Areas.Get,
   AreaRoutes.getAll,
 );
 
+// Add one area
 areaRouter.post(
-  Paths.Area.Add,
+  Paths.Areas.Add,
   validate(['area', Area.isArea]),
   AreaRoutes.add,
 );
 
+// Update one area
 areaRouter.put(
-  Paths.Area.Update,
+  Paths.Areas.Update,
   validate(['area', Area.isArea]),
   AreaRoutes.update,
 );
 
+// Delete one area
 areaRouter.delete(
-  Paths.Area.Delete,
+  Paths.Areas.Delete,
   validate(['id', 'number', 'params']),
   AreaRoutes.delete,
 );
 
-apiRouter.use(Paths.Area.Base, areaRouter);
+// Add areaRouter
+apiRouter.use(Paths.Areas.Base, areaRouter);
 
+// Jefe FUNCTIONS
+
+const jefeRouter = Router({ mergeParams: true });
+
+// Get all jefes
+jefeRouter.get(
+  Paths.Jefes.Get,
+  validate(['idA', 'number', 'params']),
+  JefeRoutes.getAll,
+);
+
+// Add one jefe
+jefeRouter.post(
+  Paths.Jefes.Add,
+  validate(['jefe', Jefe.isJefe]),
+  JefeRoutes.add,
+);
+
+// Update one jefe
+jefeRouter.put(
+  Paths.Jefes.Update,
+  validate(['jefe', Jefe.isJefe]),
+  JefeRoutes.update,
+);
+
+// Delete one jefe
+jefeRouter.delete(
+  Paths.Jefes.Delete,
+  validate(['id', 'number', 'params']),
+  JefeRoutes.delete,
+);
+
+// Add jefeRouter
+apiRouter.use(Paths.Jefes.Base, jefeRouter);
+
+// Personal FUNCTIONS
+
+const personalRouter = Router({ mergeParams: true });
+
+// Get all personales
+personalRouter.get(
+  Paths.Personales.Get,
+  PersonalRoutes.getAll,
+);
+
+// Add one personal
+personalRouter.post(
+  Paths.Personales.Add,
+  validate(['personal', Personal.isPersonal]),
+  PersonalRoutes.add,
+);
+
+// Update one personal
+personalRouter.put(
+  Paths.Personales.Update,
+  validate(['personal', Personal.isPersonal]),
+  PersonalRoutes.update,
+);
+
+// Delete one personal
+personalRouter.delete(
+  Paths.Personales.Delete,
+  validate(['id', 'number', 'params']),
+  PersonalRoutes.delete,
+);
+
+// Add personalRouter
+apiRouter.use(Paths.Personales.Base, personalRouter);
 
 // **** Export default **** //
 

@@ -1,57 +1,59 @@
 import moment from 'moment';
-import Area from './Area';
-import { IArea } from './Area'; 
-
 
 // **** Variables **** //
 
 const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' + 
-  'with the appropriate keys.';
+  'with the appropriate user keys.';
 
 
 // **** Types **** //
 
 export interface IPersonal {
   id: number;
-  apellido: string;
-  nombre: string;
+  name: string;
 }
 
 
+// **** Functions **** //
 
-
+/**
+ * Create new User.
+ */
 function new_(
-  id?: number,
-  apellido?: string,
-  nombre?: string,
+  name?: string,
+  id?: number, // id last cause usually set by db
 ): IPersonal {
   return {
-    apellido: (apellido ?? ''),
-    nombre: (nombre ?? ''),
     id: (id ?? -1),
+    name: (name ?? '')
   };
 }
 
-
+/**
+ * Get user instance from object.
+ */
 function from(param: object): IPersonal {
   if (!isPersonal(param)) {
     throw new Error(INVALID_CONSTRUCTOR_PARAM);
   }
   const p = param as IPersonal;
-  return new_(p.id,p.apellido,p.nombre);
+  return new_(p.name, p.id);
 }
 
-
+/**
+ * See if the param meets criteria to be a user.
+ */
 function isPersonal(arg: unknown): boolean {
   return (
     !!arg &&
     typeof arg === 'object' &&
     'id' in arg && typeof arg.id === 'number' && 
-    'apellido' in arg && typeof arg.apellido === 'string' &&
-    'nombre' in arg && typeof arg.nombre === 'string' &&
-    'area' in arg && typeof arg.area === 'string'
+    'nombre' in arg && typeof arg.nombre === 'string'
   );
 }
+
+
+// **** Export default **** //
 
 export default {
   new: new_,

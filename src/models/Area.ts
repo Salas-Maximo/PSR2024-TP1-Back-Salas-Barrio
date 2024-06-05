@@ -1,54 +1,60 @@
 import moment from 'moment';
-import Personal, { IPersonal } from './Personal';
-import Jefe from './Jefe';
-import { IJefe } from './Jefe';
+import { IJefe } from '@src/models/Jefe'
 
 // **** Variables **** //
 
 const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' + 
-  'with the appropriate keys.';
+  'with the appropriate user keys.';
+
 
 // **** Types **** //
 
 export interface IArea {
-  nombre: string;
-  jefe:  IJefe;
-  personal: IPersonal[];
+  id: number;
+  name: string;
+  jefes: Array<IJefe>;
 }
 
 
+// **** Functions **** //
+
+/**
+ * Create new User.
+ */
 function new_(
-  nombre?: string,
-  jefe?: IJefe,
-  personal?: IPersonal[],
+  name?: string,
+  jefes?: Array<IJefe>,
+  id?: number, // id last cause usually set by db
 ): IArea {
   return {
-    nombre: (nombre ?? ''),
-    jefe: (jefe ?? Jefe.new()),
-    personal: (personal ?? []),
+    id: (id ?? -1),
+    name: (name ?? ''),
+    jefes: []
   };
 }
 
-
-
+/**
+ * Get user instance from object.
+ */
 function from(param: object): IArea {
   if (!isArea(param)) {
     throw new Error(INVALID_CONSTRUCTOR_PARAM);
   }
   const p = param as IArea;
-  return new_(p.nombre, p.jefe, p.personal);
+  return new_(p.name, p.jefes, p.id);
 }
 
-
-
+/**
+ * See if the param meets criteria to be a user.
+ */
 function isArea(arg: unknown): boolean {
   return (
     !!arg &&
     typeof arg === 'object' &&
-    'nombre' in arg && typeof arg.nombre === 'string' &&
-    'jefe' in arg && Jefe.isJefe(arg.jefe) &&
-    'personal' in arg && Array.isArray(arg.personal)
-    )  
+    'id' in arg && typeof arg.id === 'number' && 
+    'jefes' in arg && typeof arg.jefes === 'object' && 
+    'name' in arg && typeof arg.name === 'string'
+  );
 }
 
 
