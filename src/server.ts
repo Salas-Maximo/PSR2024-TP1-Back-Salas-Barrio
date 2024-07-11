@@ -20,28 +20,35 @@ import HttpStatusCodes from '@src/constants/HttpStatusCodes';
 import { NodeEnvs } from '@src/constants/misc';
 import { RouteError } from '@src/other/classes';
 
+import cors from 'cors';
+
 
 // **** Variables **** //
 
 const app = express();
 
-
 // **** Setup **** //
 
 // Basic middleware
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(EnvVars.CookieProps.Secret));
 
 // Show routes called in console during development
-if (EnvVars.NodeEnv === NodeEnvs.Dev.valueOf()) {
+if (EnvVars.NodeEnv === 'development') {
   app.use(morgan('dev'));
 }
 
 // Security
-if (EnvVars.NodeEnv === NodeEnvs.Production.valueOf()) {
+if (EnvVars.NodeEnv === 'production') {
   app.use(helmet());
 }
+
+// Habilitar CORS
+app.use(cors({
+  origin: 'http://localhost:4200', // Reemplaza con la URL de tu frontend
+  optionsSuccessStatus: 200
+}));
 
 // Add APIs, must be after middleware
 app.use(Paths.Base, BaseRouter);
@@ -54,16 +61,15 @@ app.use((
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction,
 ) => {
-  if (EnvVars.NodeEnv !== NodeEnvs.Test.valueOf()) {
+  if (EnvVars.NodeEnv !== 'test') {
     logger.err(err, true);
   }
-  let status = HttpStatusCodes.BAD_REQUEST;
+  let status = 400;
   if (err instanceof RouteError) {
     status = err.status;
   }
   return res.status(status).json({ error: err.message });
 });
-
 
 // ** Front-End Content ** //
 
@@ -71,7 +77,7 @@ app.use((
 const viewsDir = path.join(__dirname, 'views');
 app.set('views', viewsDir);
 
-// Set static directory (js and css).
+// Set static directory (js and css)
 const staticDir = path.join(__dirname, 'public');
 app.use(express.static(staticDir));
 
@@ -80,11 +86,10 @@ app.get('/', (_: Request, res: Response) => {
   return res.redirect('/users');
 });
 
-// Redirect to login if not logged in.
+// Redirect to login if not logged in
 app.get('/users', (_: Request, res: Response) => {
   return res.sendFile('users.html', { root: viewsDir });
 });
-
 
 // **** Export default **** //
 
